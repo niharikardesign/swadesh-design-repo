@@ -25,6 +25,21 @@ const APP_DATA = {
   title: "Swadesh design repository",
 
   // ─────────────────────────────────────────────
+  //  TASKS
+  //  Shown on the Home dashboard.
+  //  status: "in-progress" | "under-review" | "yet-to-start" | "blocked" | "rejected" | "completed"
+  //  type: "prd" | "adhoc"
+  // ─────────────────────────────────────────────
+  tasks: [
+    { id: "search-zero-state",      name: "Search — Zero state",                    status: "under-review",  type: "prd"   },
+    { id: "cash-collection",        name: "Cash collection",                         status: "in-progress",   type: "prd"   },
+    { id: "corporate-po",           name: "Corporate Purchase Order",                status: "yet-to-start",  type: "prd"   },
+    { id: "ops-pay-link",           name: "Ops Assisted pay-link",                  status: "yet-to-start",  type: "adhoc" },
+    { id: "partial-payment",        name: "Partial Payment for Bespoke orders",     status: "yet-to-start",  type: "prd"   },
+    { id: "tcs",                    name: "Tax collection at source",               status: "yet-to-start",  type: "prd"   },
+  ],
+
+  // ─────────────────────────────────────────────
   //  FEATURES
   //  Each feature becomes a tab in the navigation.
   // ─────────────────────────────────────────────
