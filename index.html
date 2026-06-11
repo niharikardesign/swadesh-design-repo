@@ -684,12 +684,15 @@
       flex-shrink: 0;
       white-space: nowrap;
     }
-    .status-pill.in-progress   { background: #EEF2FF; color: #4338CA; }
-    .status-pill.under-review  { background: #FFF7ED; color: #C2410C; }
-    .status-pill.yet-to-start  { background: #F4F4F5; color: #71717A; }
-    .status-pill.blocked       { background: #FEF2F2; color: #DC2626; }
-    .status-pill.rejected      { background: #F4F4F5; color: #A1A1AA; }
-    .status-pill.completed     { background: #F0FDF4; color: #16A34A; }
+    .status-pill.in-progress      { background: #EEF2FF; color: #4338CA; }
+    .status-pill.shared-for-review { background: #FFF7ED; color: #C2410C; }
+    .status-pill.yet-to-start     { background: #F4F4F5; color: #71717A; }
+    .status-pill.blocked          { background: #FEF2F2; color: #DC2626; }
+    .status-pill.rejected         { background: #F4F4F5; color: #A1A1AA; }
+    .status-pill.completed        { background: #F0FDF4; color: #16A34A; }
+
+    .task-row[data-feature] { cursor: pointer; transition: background 0.12s; }
+    .task-row[data-feature]:hover { background: var(--accent-light); }
 
     /* ─── Indexed Iterations Section ────────────────── */
     .iterations-section {
@@ -1157,21 +1160,18 @@ function renderIteration(iter, index, featureId) {
 }
 
 const STATUS_LABELS = {
-  "in-progress":  "In progress",
-  "under-review": "Under review",
-  "yet-to-start": "Yet to start",
-  "blocked":      "Blocked",
-  "rejected":     "Rejected",
-  "completed":    "Completed"
+  "in-progress":       "In progress",
+  "shared-for-review": "Shared for review",
+  "yet-to-start":      "Yet to start",
+  "blocked":           "Blocked",
+  "rejected":          "Rejected",
+  "completed":         "Completed"
 };
 
 function renderHomeDashboard(tasks) {
   const rows = (tasks || []).map(t => `
-    <div class="task-row status-${t.status}">
-      <div class="task-row-left">
-        <span class="task-type-badge ${t.type}">${t.type === 'prd' ? 'PRD' : 'Ad hoc'}</span>
-        <span class="task-name">${t.name}</span>
-      </div>
+    <div class="task-row status-${t.status}"${t.featureId ? ` data-feature="${t.featureId}" onclick="activateTab('${t.featureId}')"` : ''}>
+      <span class="task-name">${t.name}</span>
       <span class="status-pill ${t.status}">${STATUS_LABELS[t.status] || t.status}</span>
     </div>`).join("");
 
