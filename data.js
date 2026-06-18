@@ -120,7 +120,7 @@ const APP_DATA = {
         {
           id: "search-iter-1",
           label: "Finalised iteration",
-          date: "2026-06-11",
+          date: "2026-06-17",
           designer: "Niharika",
           notes: "Zero state of search. All configurable sections in CMS.",
           annotations: [
@@ -137,22 +137,22 @@ const APP_DATA = {
             {
               section: "You might be interested in",
               detail: "Curated suggestion list rendered as plain text links. Sample: Mysore Rosewood Inlay, Banarasi Silk Sarees, Bronze Statues, Chikankari Kurti.",
-              configuration: "CMS-driven. All links configurable."
+              configuration: "CMS-driven. All links configurable. An AI recommendation engine can be plugged in to dynamically surface products."
             },
             {
               section: "Be inspired (editorial cards)",
               detail: "Full-bleed image cards with title overlay and gradient. Two cards side by side — e.g. Jewellery, Silk Selection. Section label and theme tag shown above.",
-              configuration: "Set of 2 cards — each card has configurable image, title, and URL. Section title has 2 configurable fields separated by a dot (e.g. 'Be Inspired • Festive'). Fixed constraints: cards per section — 2; section title word limits — 15 & 24 chars; max sections — 2 (4 cards total); card title char count — 24 chars."
+              configuration: "Set of 2 cards — each card has configurable image, title, and URL. Section title has 2 configurable fields separated by a dot (e.g. 'Be Inspired • Festive'). Fixed constraints: cards per section — 2; section title word limits — 15 & 24 chars; max sections — 2 (4 cards total); card title char count — 24 chars. An AI recommendation engine can be plugged in to dynamically surface collections."
             },
             {
               section: "Crafts • Weaves & Prints (mobile only)",
               detail: "Additional editorial card section below Be Inspired, using the same card component. Cards: Banarasi Weaves, Bandhni Tye Dye. Not present in the desktop layout.",
-              configuration: "Same component and configuration rules as the Be Inspired editorial section above."
+              configuration: "Same component and configuration rules as the Be Inspired editorial section above. An AI recommendation engine can be plugged in to dynamically surface collections."
             },
             {
               section: "Discover latest",
               detail: "Desktop: 2-column product grid. Mobile: single-column list. Each item shows thumbnail, product name, and price.",
-              configuration: "Configurable product list. Min — 4 items, Max — 8 items."
+              configuration: "Configurable product list. Min — 4 items, Max — 8 items. An AI recommendation engine can be plugged in to dynamically surface products."
             },
             {
               section: "Customer care",
@@ -163,6 +163,32 @@ const APP_DATA = {
               section: "Layout note",
               detail: "Desktop uses a two-column layout — suggestions + customer care on the left, editorial + products on the right. Mobile is single-column with the same sections stacked in sequence.",
               configuration: ""
+            }
+          ],
+          designDecisions: [
+            {
+              title: "Zero state was historically blank",
+              problem: "The search surface showed nothing until a user typed. Users in discovery mode (not query mode) had no entry point.",
+              decision: "Structured the zero state as a multi-section discovery surface covering personal history, curated suggestions, editorial, and products, so it is useful before any intent is expressed.",
+              constraint: "Sections must feel considered, not algorithmic. Swadesh's voice is unhurried and editorial; a dense product grid at zero state would undercut that."
+            },
+            {
+              title: "Editorial vs product-first hierarchy",
+              problem: "Should the zero state lead with products (highest commercial value) or editorial content (brand identity)?",
+              decision: "Editorial cards (Be Inspired) sit above Discover Latest. Brand tone is set before products are surfaced.",
+              constraint: "Luxury positioning. Swadesh is a craft platform, not a marketplace. Leading with a product grid at zero state reads as transactional. References like Cartier reinforced editorial-first as the right anchor."
+            },
+            {
+              title: "Number of editorial cards",
+              problem: "More cards give more editorial range, but smaller per-card visual impact.",
+              decision: "2 full-width cards per section is the recommended configuration for strongest visual presence. The system supports up to 4 cards if a specific campaign or seasonal requirement calls for it.",
+              constraint: "Card title is capped at 24 characters and section title at 15 + 24 characters to maintain legibility at the constrained card size."
+            },
+            {
+              title: "CMS configurability, AI recommendation and section ordering",
+              problem: "Editorial themes change seasonally. Hardcoded content would require engineering effort for every campaign.",
+              decision: "Every section is CMS-driven. Editorial images, titles, suggestion links, and the product list are all configurable without a deployment. The order of the collections (Be Inspired) and product list (Discover Latest) sections can also be reordered via CMS to give prominence to either, depending on the season's requirement. The product listing (max 8 items) can additionally be powered by an AI recommendation engine to surface personalised product suggestions in place of manual curation.",
+              constraint: "Card and title character limits (24 chars, 15 + 24 chars) are imposed to prevent layout breakage across the fixed card grid. These are non-negotiable regardless of what content is configured."
             }
           ],
           designFileUrl: "https://www.figma.com/design/2RDOfw58K5HptIQOtAfjWx/Search---zero-state?node-id=70853-2251&t=kF1CKdZfe5XiZd0q-4",
